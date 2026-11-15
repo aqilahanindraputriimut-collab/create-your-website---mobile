@@ -1,2 +1,11 @@
-# create-your-website---mobile
-Hi, do you want create website like me? but you no have code, it's okay, becausE, l have for help you anywere, Like file tyPe providers, naMEly HTML, JS, CSS, JSON, and TXT like, thanks for visit this website
+===========================================
+  readme for create your website - mobile
+===========================================
+
+Usage guide:
+1. Ensure you are in the browser environment.
+2. Have your code ready.
+3. All buttons are located below the header.
+4. This version has been verified.
+5. You may select the file type.
+6. Do not misuse this tool.
