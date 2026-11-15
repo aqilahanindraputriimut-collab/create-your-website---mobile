@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create your website - mobile</title>
+    <style>
+        :root {
+            --bg: #0b1220;
+            --bg-soft: #111827;
+            --panel: rgba(15, 23, 42, 0.9);
+            --panel-2: rgba(17, 24, 39, 0.96);
+            --panel-3: rgba(30, 41, 59, 0.8);
+            --line: rgba(148, 163, 184, 0.18);
+            --line-strong: rgba(148, 163, 184, 0.3);
+            --text: #e5eefb;
+            --muted: #94a3b8;
+            --blue: #2563eb;
+            --blue-soft: #1d4ed8;
+            --green: #10b981;
+            --amber: #f59e0b;
+            --red: #ef4444;
+            --purple: #8b5cf6;
+            --shadow: 0 22px 45px rgba(2, 6, 23, 0.45);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 22%),
+                linear-gradient(180deg, #050b14 0%, #0f172a 100%);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .app-shell {
+            width: min(1380px, 100%);
+            height: min(860px, calc(100vh - 44px));
+            display: flex;
+            background: rgba(15, 23, 42, 0.72);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar {
+            width: 68px;
+            background: rgba(2, 6, 23, 0.72);
+            border-right: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 14px 10px 18px;
+            gap: 16px;
+        }
+
+        .brand {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #1d4ed8, #60a5fa);
+            display: grid;
+            place-items: center;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .nav-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            background: rgba(148, 163, 184, 0.05);
+            color: #cbd5e1;
+            display: grid;
+            place-items: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .nav-icon.active {
+            background: rgba(37, 99, 235, 0.18);
+            border-color: rgba(96, 165, 250, 0.4);
+            color: #eff6ff;
+        }
+
+        .nav-icon:last-child {
+            margin-top: auto;
+        }
+
+        .workspace {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 16px;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .topbar-left,
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .window-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .window-dot.red { background: #f87171; }
+        .window-dot.yellow { background: #fbbf24; }
+        .window-dot.green { background: #34d399; }
+
+        .toolbar-chip {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            background: rgba(148, 163, 184, 0.08);
+            color: #e2e8f0;
+            border: 1px solid var(--line);
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            background: rgba(15, 23, 42, 0.65);
+        }
+
+        .editor-panel {
+            flex: 1;
+            min-width: 0;
+            padding: 16px 18px 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .editor-shell {
+            flex: 1;
+            min-height: 0;
+            background: rgba(247, 250, 252, 0.96);
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+
+        .editor-head {
+            background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: inset 0 -1px 0 rgba(0,0,0,0.08);
+        }
+
+        .editor-head h1 {
+            font-size: clamp(1.35rem, 1vw + 1rem, 2rem);
+            color: white;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .file-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px 8px;
+            background: rgba(241, 245, 249, 0.9);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .file-bar input[type="text"] {
+            flex: 1;
+            min-width: 0;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.8);
+            color: #0f172a;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .file-bar input[type="text"]:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .file-bar select {
+            padding: 8px 10px;
+            min-width: 72px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background: #fff;
+            color: #334155;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .file-bar button {
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            font-size: 0.86rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-import {
+            background: #fef3c7;
+            color: #b45309;
+            border-color: rgba(245, 158, 11, 0.25);
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            background: rgba(248, 250, 252, 0.85);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.32);
+        }
+
+        .btn-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar button {
+            padding: 7px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: #fff;
+            color: #334155;
+            font-size: 0.84rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .toolbar button:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-history {
+            background: #f8fafc;
+            color: #334155;
+        }
+
+        .btn-test {
+            background: #f3e8ff;
+            color: #6d28d9;
+            border-color: rgba(139, 92, 246, 0.22);
+        }
+
+        .btn-copy {
+            background: #dbeafe;
+            color: #1d4ed8;
+            border-color: rgba(59, 130, 246, 0.22);
+        }
+
+        .btn-download {
+            background: #dcfce7;
+            color: #15803d;
+            border-color: rgba(34, 197, 94, 0.2);
+        }
+
+        .btn-clear {
+            background: #fee2e2;
+            color: #b91c1c;
+            border-color: rgba(239, 68, 68, 0.18);
+        }
+
+        textarea {
+            width: 100%;
+            flex: 1;
+            min-height: 180px;
+            border: none;
+            background: rgba(255,255,255,0.6);
+            padding: 16px 18px;
+            resize: none;
+            outline: none;
+            font-family: "Consolas", "SFMono-Regular", monospace;
+            font-size: 0.96rem;
+            line-height: 1.5;
+            color: #1f2937;
+        }
+
+        textarea::placeholder {
+            color: #64748b;
+        }
+
+        textarea:focus {
+            box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.18);
+        }
+
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: rgba(248, 250, 252, 0.94);
+            border-top: 1px solid rgba(148, 163, 184, 0.3);
+            padding: 10px 14px;
+            color: #475569;
+            font-size: 0.78rem;
+        }
+
+        .status {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .side-panel {
+            width: 320px;
+            background: rgba(8, 15, 27, 0.74);
+            border-left: 1px solid var(--line);
+            padding: 18px 16px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .side-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 14px 14px 12px;
+        }
+
+        .side-card h3 {
+            color: #e2e8f0;
+            font-size: 0.94rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .side-card ul {
+            list-style: none;
+            display: grid;
+            gap: 8px;
+            color: #cbd5e1;
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .side-card li::before {
+            content: "•";
+            color: #60a5fa;
+            margin-right: 8px;
+        }
+
+        .panel-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: #bfdbfe;
+            background: rgba(37, 99, 235, 0.12);
+            border: 1px solid rgba(96,165,250,0.24);
+            border-radius: 999px;
+            padding: 6px 10px;
+            margin-bottom: 10px;
+        }
+
+        .mini-preview {
+            background: rgba(2, 6, 23, 0.5);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 12px;
+            color: #dbeafe;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 980px) {
+            body {
+                padding: 12px;
+            }
+
+            .app-shell {
+                height: calc(100vh - 24px);
+            }
+
+            .side-panel {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar" aria-label="Sidebar navigasi">
+            <div class="brand">F</div>
+            <div class="nav-icon active">◫</div>
+            <div class="nav-icon">⌂</div>
+            <div class="nav-icon">◌</div>
+            <div class="nav-icon">⚙</div>
+            <div class="nav-icon">☰</div>
+            <div class="nav-icon">◉</div>
+        </aside>
+
+        <div class="workspace">
+            <header class="topbar" aria-label="Baris atas aplikasi">
+                <div class="topbar-left">
+                    <span class="window-dot red"></span>
+                    <span class="window-dot yellow"></span>
+                    <span class="window-dot green"></span>
+                </div>
+
+                <div class="topbar-right">
+                    <div class="toolbar-chip">⤴</div>
+                    <div class="toolbar-chip">⚙</div>
+                    <div class="toolbar-chip">◌</div>
+                </div>
+            </header>
+
+            <div class="content">
+                <main class="editor-panel">
+                    <div class="editor-shell">
+                        <div class="editor-head">
+                            <h1>create your website - mobile</h1>
+                        </div>
+
+                        <div class="file-bar" aria-label="Pengaturan nama dan jenis file">
+                            <label class="sr-only" for="fileName">Nama file</label>
+                            <input type="text" id="fileName" placeholder="Nama file..." value="index" aria-label="Nama file">
+                            <label class="sr-only" for="fileExt">Ekstensi file</label>
+                            <select id="fileExt" aria-label="Ekstensi file">
+                                <option value=".html">.html</option>
+                                <option value=".css">.css</option>
+                                <option value=".js">.js</option>
+                                <option value=".txt">.txt</option>
+                                <option value=".json">.json</option>
+                            </select>
+                            <input type="file" id="fileInput" style="display: none;" accept=".html,.css,.js,.txt,.json,.md">
+                            <button class="btn-import" type="button" onclick="triggerImport()">Impor</button>
+                        </div>
+
+                        <nav class="toolbar" aria-label="Toolbar aksi">
+                            <div class="btn-group">
+                                <button class="btn-history" type="button" id="btnUndo" onclick="undo()" disabled>↩ Undo</button>
+                                <button class="btn-history" type="button" id="btnRedo" onclick="redo()" disabled>↪ Redo</button>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn-test" type="button" onclick="runTest()">Tes</button>
+                                <button class="btn-copy" type="button" onclick="copyText()">Salin</button>
+                                <button class="btn-download" type="button" onclick="downloadText()">Unduh</button>
+                                <button class="btn-clear" type="button" onclick="clearText()">Hapus</button>
+                            </div>
+                        </nav>
+
+                        <label class="sr-only" for="notepad">Area penulisan</label>
+                        <textarea id="notepad" aria-label="Area penulisan" placeholder="Mulai ketik kode HTML, CSS, JS, atau catatan Anda di sini..."></textarea>
+
+                        <footer>
+                            <span class="status" id="saveStatus">Tersimpan</span>
+                            <div>
+                                <span id="wordCount">0 Kata</span> | 
+                                <span id="charCount">0 Karakter</span>
+                            </div>
+                        </footer>
+                    </div>
+                </main>
+
+                <aside class="side-panel" aria-label="Panel bantuan">
+                    <div class="side-card">
+                        <div class="panel-tag">✦ HTML5</div>
+                        <h3>tambahkan tombol tes dan tingkatkan menjadi HTML5</h3>
+                        <ul>
+                            <li>File yang diperbarui: html.html</li>
+                            <li>Gunakan tombol Tes untuk validasi cepat</li>
+                            <li>UI kini lebih modern dan responsif</li>
+                        </ul>
+                    </div>
+
+                    <div class="side-card">
+                        <h3>Langkah berikutnya</h3>
+                        <div class="mini-preview">
+                            • buat tombol Preview untuk melihat hasil HTML langsung<br>
+                            • tambahkan tema dark mode<br>
+                            • ubah agar mirip editor profesional VS Code
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const notepad = document.getElementById('notepad');
+        const fileNameInput = document.getElementById('fileName');
+        const fileExtSelect = document.getElementById('fileExt');
+        const fileInput = document.getElementById('fileInput');
+        const btnUndo = document.getElementById('btnUndo');
+        const btnRedo = document.getElementById('btnRedo');
+        const saveStatus = document.getElementById('saveStatus');
+        const wordCount = document.getElementById('wordCount');
+        const charCount = document.getElementById('charCount');
+
+        const STORAGE_TEXT_KEY = 'cyw_mobile_text';
+        const STORAGE_NAME_KEY = 'cyw_mobile_filename';
+        const STORAGE_EXT_KEY = 'cyw_mobile_fileext';
+
+        let historyStack = [''];
+        let historyIndex = 0;
+        let typingTimer = null;
+
+        function recordHistory(value) {
+            if (historyStack[historyIndex] === value) return;
+
+            const nextStack = historyStack.slice(0, historyIndex + 1);
+            nextStack.push(value);
+
+            if (nextStack.length > 50) {
+                nextStack.shift();
+            }
+
+            historyStack = nextStack;
+            historyIndex = historyStack.length - 1;
+            updateHistoryButtons();
+        }
+
+        function updateHistoryButtons() {
+            btnUndo.disabled = historyIndex <= 0;
+            btnRedo.disabled = historyIndex >= historyStack.length - 1;
+        }
+
+        function saveToLocal() {
+            saveStatus.textContent = 'Menyimpan...';
+            saveStatus.style.color = '#f59e0b';
+            localStorage.setItem(STORAGE_TEXT_KEY, notepad.value);
+
+            setTimeout(() => {
+                saveStatus.textContent = 'Tersimpan';
+                saveStatus.style.color = '#10b981';
+            }, 300);
+        }
+
+        function updateCounts() {
+            const text = notepad.value;
+            charCount.textContent = `${text.length} Karakter`;
+            const words = text.trim().split(/\s+/).filter((word) => word.length > 0);
+            wordCount.textContent = `${words.length} Kata`;
+        }
+
+        function undo() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                notepad.value = historyStack[historyIndex];
+                saveToLocal();
+                updateCounts();
+                updateHistoryButtons();
+            }
+        }
+
+        function redo() {
+            if (historyIndex < historyStack.length - 1) {
+                historyIndex++;
+                notepad.value = historyStack[historyIndex];
+                saveToLocal();
+                updateCounts();
+                updateHistoryButtons();
+            }
+        }
+
+        function triggerImport() {
+            fileInput.click();
+        }
+
+        function runTest() {
+            const text = notepad.value.trim();
+
+            if (!text) {
+                saveStatus.textContent = 'Tes gagal: teks kosong';
+                saveStatus.style.color = '#ef4444';
+                return;
+            }
+
+            const charCountValue = text.length;
+            const wordCountValue = text.split(/\s+/).filter((word) => word.length > 0).length;
+            const fileName = (fileNameInput.value.trim() || 'index').replace(/\s+/g, '-');
+
+            saveStatus.textContent = `Tes berhasil: ${wordCountValue} kata, ${charCountValue} karakter, file ${fileName}${fileExtSelect.value}`;
+            saveStatus.style.color = '#10b981';
+        }
+
+        function copyText() {
+            if (!notepad.value) return;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(notepad.value)
+                    .then(() => {
+                        saveStatus.textContent = 'Teks disalin!';
+                        setTimeout(() => {
+                            saveStatus.textContent = 'Tersimpan';
+                        }, 1500);
+                    })
+                    .catch(() => {
+                        saveStatus.textContent = 'Gagal menyalin';
+                    });
+                return;
+            }
+
+            notepad.select();
+            document.execCommand('copy');
+            saveStatus.textContent = 'Teks disalin!';
+            setTimeout(() => {
+                saveStatus.textContent = 'Tersimpan';
+            }, 1500);
+        }
+
+        function downloadText() {
+            if (!notepad.value) {
+                alert('Area teks masih kosong!');
+                return;
+            }
+
+            const cleanName = fileNameInput.value.trim() || 'dokumen';
+            const ext = fileExtSelect.value;
+            const fullFileName = cleanName + ext;
+            const blob = new Blob([notepad.value], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fullFileName;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function clearText() {
+            if (notepad.value && confirm('Hapus semua isi teks?')) {
+                notepad.value = '';
+                recordHistory('');
+                saveToLocal();
+                updateCounts();
+                saveStatus.textContent = 'Dihapus';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedText = localStorage.getItem(STORAGE_TEXT_KEY);
+            const savedName = localStorage.getItem(STORAGE_NAME_KEY);
+            const savedExt = localStorage.getItem(STORAGE_EXT_KEY);
+
+            if (savedName) fileNameInput.value = savedName;
+            if (savedExt) fileExtSelect.value = savedExt;
+
+            if (savedText !== null) {
+                notepad.value = savedText;
+                historyStack = [savedText];
+                historyIndex = 0;
+            }
+
+            updateCounts();
+            updateHistoryButtons();
+        });
+
+        fileNameInput.addEventListener('input', () => {
+            localStorage.setItem(STORAGE_NAME_KEY, fileNameInput.value);
+        });
+
+        fileExtSelect.addEventListener('change', () => {
+            localStorage.setItem(STORAGE_EXT_KEY, fileExtSelect.value);
+        });
+
+        notepad.addEventListener('input', () => {
+            saveToLocal();
+            updateCounts();
+
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(() => {
+                recordHistory(notepad.value);
+            }, 400);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const lastDotIndex = file.name.lastIndexOf('.');
+            if (lastDotIndex !== -1) {
+                const namePart = file.name.substring(0, lastDotIndex);
+                const extPart = file.name.substring(lastDotIndex).toLowerCase();
+                fileNameInput.value = namePart;
+                localStorage.setItem(STORAGE_NAME_KEY, namePart);
+
+                const optionExists = Array.from(fileExtSelect.options).some((opt) => opt.value === extPart);
+                if (optionExists) {
+                    fileExtSelect.value = extPart;
+                    localStorage.setItem(STORAGE_EXT_KEY, extPart);
+                }
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                notepad.value = event.target.result;
+                recordHistory(notepad.value);
+                saveToLocal();
+                updateCounts();
+                saveStatus.textContent = 'File diimpor!';
+            };
+            reader.readAsText(file);
+            fileInput.value = '';
+        });
+    </script>
+</body>
+</html>
