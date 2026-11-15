@@ -1,7 +1,8 @@
 ===========================================
   readme for create your website - mobile
 ===========================================
-<img width="1254" height="668" alt="image" src="https://github.com/user-attachments/assets/025241fd-424c-4aab-8dff-3f3d835bc2f7" />
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/fadee603-a1c7-4985-955e-7356b58e25fd" />
+
 
 Usage guide:
 1. Ensure you are in the browser environment.
